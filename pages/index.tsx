@@ -1,118 +1,329 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
+import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { LuArrowRight, LuMenu, LuX } from 'react-icons/lu';
+import { FaArrowRight, FaArrowUp, FaCheck, FaCheckCircle, FaFacebook, FaInstagram, FaRocket, FaShoppingBasket, FaWhatsapp } from 'react-icons/fa';
+import { FaSackDollar } from 'react-icons/fa6';
+import { BiError } from 'react-icons/bi';
 
-const inter = Inter({ subsets: ["latin"] });
+const Home = () => {
 
-export default function Home() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [showScrollTopButton, setShowScrollTopButton] = useState(false);
+  const [showCookieBanner, setShowCookieBanner] = useState(true);
+
+  const MenuItems = [
+    { name: 'Quem Somos', link: '#planos' },
+    { name: 'Nossa Missção', link: '' },
+    { name: 'Onde Estamos', link: ''},
+    { name: 'Departamento', link: ''},
+    { name: 'Ofertas', link: ''},
+    { name: 'Agenda', link: ''}
+  ];
+
+  const cultos = [
+    {
+      diaSemana: 'Terça-feira',
+      descricaoCulto: 'Culto de Ensino',
+    },
+    {
+      diaSemana: 'Sexta-feira',
+      descricaoCulto: 'Culto da CIBE',
+    },
+    {
+      diaSemana: 'Sabado',
+      descricaoCulto: 'Culto dos Jovens',
+    },
+    {
+      diaSemana: 'Domingo',
+      descricaoCulto: 'Manhã: Escola Biblica Dominical (EBD) Noite: Evangelistico',
+    },
+  ];
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    const handleScroll = () => {
+      if (window.scrollY > 200) {
+        setShowScrollTopButton(true);
+      } else {
+        setShowScrollTopButton(false);
+      }
+    };
+
+    const checkCookieConsent = () => {
+      const consent = localStorage.getItem('modal-lgpd');
+      if (consent) {
+        setShowCookieBanner(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('scroll', handleScroll);
+
+    handleResize();
+    checkCookieConsent();
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);  
+
+  const togglecultos = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
+  const onClose = () => {
+    setIsOpen(false);
+  };
+
+  const handleCookieConsent = () => {
+    localStorage.setItem('modal-lgpd', 'true');
+    setShowCookieBanner(false);
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleLinkClick = () => {
+    setIsOpen(false);
+  };
+
+  const currentYear = new Date().getFullYear();
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-    >
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">pages/index.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
+    <div className="min-h-screen relative">
+      <header className="relative bg-gradient-to-r from-white to-white py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+          <div className="flex items-center">
+            <Image 
+              src="/img/logo_compacta_color.png" 
+              alt="CoelhoVendas Logo" 
+              width={150} 
+              height={150}
+              quality={100}
+              className="object-contain"  
             />
-          </a>
+            {!isMobile && (
+              <nav className="ml-10 space-x-4">
+                {MenuItems.map(item => (
+                  <Link 
+                    key={item.name} 
+                    href={item.link} 
+                    className="text-gray-600 px-4 py-2"
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </nav>
+            )}
+          </div>
+          <div className="flex items-center">
+            {isMobile && (
+              <button onClick={() => setIsOpen(true)} className="text-gray-600 text-3xl">
+                <LuMenu />
+              </button>
+            )}
+          </div>
         </div>
-      </div>
+        {isMobile && (
+          <div className={`fixed inset-0 z-50 bg-orange-700 overflow-y-auto transition-transform duration-300 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+            <div className="flex flex-col">
+              <div className="flex items-center">
+                <button className="p-4 text-white text-3xl" onClick={onClose}>
+                  <LuX />
+                </button>
+                <img src="/img/logo_compacta_branca.png" alt="Logo" className="h-12" />
+              </div>
+              <hr className="my-1 border-orange-800" />
+              {MenuItems.map(item => (
+                <div key={item.name}>
+                  <a href={item.link} onClick={handleLinkClick} className="block">
+                    <div className={`flex items-center justify-between px-5 py-2 border-b border-orange-800 text-white cursor-pointer`}>
+                      <div className="flex items-center">
+                        <span>{item.name}</span>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              ))}              
+            </div>
+          </div>
+        )}
+      </header>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700/10 after:dark:from-sky-900 after:dark:via-[#0141ff]/40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+      <main className="relative">
+        <div className="relative h-screen">
+          <Image
+            src="/img/culto_ensino.png"
+            alt="culto ensino"
+            layout="fill"
+            objectFit="cover"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 flex flex-col justify-center items-start bg-gradient-to-b from-transparent to-black p-8">
+            <h1 className="text-4xl font-bold text-white mb-4 animate-slide-up">Pastor Walter Luiz</h1>
+            <p className="text-white text-lg mb-6 animate-slide-up">
+              Seu estilo eloquente, franco, direto e questionador são <br />
+              características que marcam a sua trajetória ao longo <br />
+              de vários anos como defensor da fé cristã.
+            </p>
+            <button className="px-4 py-2 bg-white text-black rounded-full">Confira</button>
+          </div>
+        </div>
+        <style jsx>{`
+          .animate-slide-up {
+            animation: slide-up 1s ease-in-out forwards;
+          }
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
+          @keyframes slide-up {
+            from {
+              transform: translateY(100%);
+              opacity: 0;
+            }
+            to {
+              transform: translateY(0);
+              opacity: 1;
+            }
+          }
+        `}</style>
+      </main>
+
+      <section className="relative bg-gradient-to-r from-orange-950 to-orange-800 py-20 text-white text-center" id="cta-2">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-4xl font-bold mb-4">Deseja aceitar a Jesus Cristo como seu salvador?</h2>
+          <div className="flex flex-col sm:flex-row items-center justify-center">
+            <Link href="/cadastro" className="bg-transparent border border-orange-600 text-white px-6 py-3 rounded-md text-md mb-4 sm:mb-0 sm:mr-4 transition-transform transform hover:scale-110 hover:shadow-xl flex items-center">
+              Sim! Eu Desejo
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-slate-50 py-20" id="cultos">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-black-600 text-center">Nosso Cultos</h2>
+          <p className="mt-4 text-gray-500 text-center">Se não encontrar a resposta abaixo, entre em contato</p>
+          <div className="mt-10">
+            {cultos.map((cultos, index) => (
+              <div key={index} className="border-b border-gray-200 py-4">
+                <button
+                  className="flex justify-between items-center w-full text-left text-gray-700 focus:outline-none"
+                  onClick={() => togglecultos(index)}
+                >
+                  <span className="text-lg font-medium"><b>{cultos.diaSemana}</b></span>
+                  <span className="text-2xl">
+                    {openIndex === index ? '-' : '+'}
+                  </span>
+                </button>
+                {openIndex === index && (
+                  <p className="mt-2 text-gray-600">{cultos.descricaoCulto}</p>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <footer className="relative bg-gradient-to-r from-orange-900 to-orange-950 py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 text-white">
+          <div>
+            <Image 
+              src="/img/logo_compacta_branca.png" 
+              alt="CoelhoVendas Logo" 
+              width={200} 
+              height={200} 
+              quality={100}
+              className="object-contain" 
+            />
+          </div>
+          <div>
+            <h3 className="text-md font-bold mb-4">Menu</h3>
+            <ul className="text-sm space-y-2">
+              {MenuItems.map(item => (
+                <li key={item.name}>
+                  <Link href={item.link} className="hover:underline">
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h3 className="text-md font-bold mb-4">Links</h3>
+            <ul className="text-sm space-y-2">
+              <li>
+                <Link href="/politica-de-privacidade" className="hover:underline">
+                  Política de privacidade
+                </Link>
+              </li>
+              <li>
+                <Link href="/termos-de-uso" className="hover:underline">
+                  Termos de Uso
+                </Link>
+              </li>
+              <li>
+                <Link href="/codigo-de-etica" className="hover:underline">
+                  Código de ética e conduta
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 className="text-md font-bold mb-4">Contato</h3>
+            <p></p>
+            <p></p>
+            <div className="text-sm flex space-x-4 mt-4">
+              <a href="https://facebook.com" className="hover:text-gray-300">
+                <FaFacebook size={24} />
+              </a>
+              <a href="https://instagram.com" className="hover:text-gray-300">
+                <FaInstagram size={24} />
+              </a>
+            </div>
+          </div>
+        </div>
+        <div className="text-xs text-center mt-8 text-white">
+          <hr className="my-4 border-orange-800" />
+          <p>© {currentYear} AD Madureira Porto Nacional. Todos os direitos reservados.</p>
+        </div>
+      </footer>     
+
+      {showScrollTopButton && (
+        <>
+          <button
+            onClick={scrollToTop}
+            className="fixed bottom-8 right-8 bg-orange-700 text-white p-3 rounded-full shadow-lg hover:bg-orange-800 focus:outline-none"
+          >
+            <FaArrowUp className="text-xl" />
+          </button>
+        </>
+      )}
+
+      {showCookieBanner && (
+        <div className="fixed bottom-0 left-0 right-0 bg-gray-800 text-white py-4 px-6 flex justify-between items-center">
+          <p className="text-sm">
+            Nosso site utiliza cookies para oferecer a você uma melhor experiência. Ao clicar em "Entendi", você declara estar ciente com nossa{' '}
+            <Link href="/politica-de-privacidade" className="underline">
+              Política de Privacidade
+            </Link>.
           </p>
-        </a>
+          <button
+            onClick={handleCookieConsent}
+            className="bg-orange-600 hover:bg-orange-700 text-white py-2 px-4 rounded"
+          >
+            Entendi
+          </button>
+        </div>
+      )}
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Discover and deploy boilerplate example Next.js&nbsp;projects.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </div>
   );
 }
+
+export default Home;
