@@ -3,15 +3,24 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { LuMenu, LuX } from 'react-icons/lu';
 import { FaArrowUp, FaInstagram, FaYoutube } from 'react-icons/fa';
+import { fetchInstagramStories } from '../lib/instagram';
+
+interface IFeedItem {
+  media_type: string;
+  id: string;
+  media_url: "IMAGE" | "CAROUSEL_ALBUM" | "VIDEO";
+  permalink: string;
+}
 
 
 const Home = () => {
-
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [showScrollTopButton, setShowScrollTopButton] = useState(false);
   const [showCookieBanner, setShowCookieBanner] = useState(true);
+  const [stories, setStories] = useState([]);
+  const [feedList, setFeedList] = useState<IFeedItem[]>([]);
 
   const MenuItems = [
     { name: 'Quem Somos', link: '#planos' },
@@ -36,9 +45,9 @@ const Home = () => {
     },
     {
       diaSemana: 'Domingo',
-      descricaoCulto: 'Manhã: Escola Biblica Dominical (EBD) Noite: Evangelistico',
+      descricaoCulto: 'Manhã: <b>Escola Biblica Dominical (EBD)</b> Noite: <b>Evangelistico</b>',
     },
-  ];
+  ];  
 
   useEffect(() => {
     const handleResize = () => {
@@ -70,7 +79,19 @@ const Home = () => {
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);  
+  }, []);
+
+  async function getInstaFeed() {
+    const accessToken = 'IGQWRQS05UUEs4eEpRenY2b1FCNDVtWDExUzYxN1BtNUY5VVZAxLWJ4alV5NVhMaDFqMTg1bkNLVF9JWk9hbWY2RjBmdjdsZAl9VQkpTQi1xLWxaMkxaVjFUMEhfS1gxbTNheHhYb2hCRXlBRUJvYmZAIa1c4aHV4VzgZD'; // Substitua pelo seu token de acesso
+    const fields = "media_url,media_type,permalink";
+    const response = await fetch(`https://graph.instagram.com/me/media?access_token=${accessToken}&fields=${fields}`);
+    const data = await response.json();
+    setFeedList(data.data);
+  }
+  
+  useEffect(() => {    
+    getInstaFeed();
+  }, []);
 
   const togglecultos = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -158,7 +179,7 @@ const Home = () => {
       <main className="relative">
         <div className="relative h-screen">
           <Image
-            src="/img/culto_ensino.png"
+            src="/img/pr_pra.png"
             alt="culto ensino"
             layout="fill"
             objectFit="cover"
@@ -171,7 +192,7 @@ const Home = () => {
               características que marcam a sua trajetória ao longo <br />
               de vários anos como defensor da fé cristã.
             </p>
-            <button className="px-4 py-2 bg-white text-black rounded-full">Confira</button>
+            {/*<button className="px-4 py-2 bg-white text-black rounded-full">Confira</button>*/}
           </div>
         </div>
         <style jsx>{`
@@ -203,10 +224,29 @@ const Home = () => {
         </div>
       </section>
 
+      <section className="bg-white py-12" id="FeedInstagram">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl text-black-600 text-center font-poppins font-semibold">Instagram</h2>
+          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {feedList.slice(0, 12).map(item => (
+              <a key={item.id} href={item.permalink} target='_blank' rel='noopener noreferrer' className="block overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                {item.media_type === "IMAGE" || item.media_type === "CAROUSEL_ALBUM" ? (
+                  <img src={item.media_url} alt="Instagram Feed" className="w-full h-full object-cover" />
+                ) : (
+                  <video controls className="w-full h-full object-cover">
+                    <source src={item.media_url} />
+                  </video>
+                )}
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="bg-slate-50 py-20" id="cultos">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl text-black-600 text-center font-poppins font-semibold">Nosso Cultos</h2>
-          <p className="mt-4 text-gray-500 text-center">Se não encontrar a resposta abaixo, entre em contato</p>
+          {/*<p className="mt-4 text-gray-500 text-center">Se não encontrar a resposta abaixo, entre em contato</p>*/}
           <div className="mt-10">
             {cultos.map((cultos, index) => (
               <div key={index} className="border-b border-gray-200 py-4">
@@ -220,7 +260,7 @@ const Home = () => {
                   </span>
                 </button>
                 {openIndex === index && (
-                  <p className="mt-2 text-gray-600">{cultos.descricaoCulto}</p>
+                  <p className="mt-2 text-gray-600" dangerouslySetInnerHTML={{ __html: cultos.descricaoCulto }}></p>
                 )}
               </div>
             ))}
@@ -253,34 +293,14 @@ const Home = () => {
             </ul>
           </div>
           <div>
-            <h3 className="text-md font-bold mb-4">Links</h3>
-            <ul className="text-sm space-y-2">
-              <li>
-                <Link href="/politica-de-privacidade" className="hover:underline">
-                  Política de privacidade
-                </Link>
-              </li>
-              <li>
-                <Link href="/termos-de-uso" className="hover:underline">
-                  Termos de Uso
-                </Link>
-              </li>
-              <li>
-                <Link href="/codigo-de-etica" className="hover:underline">
-                  Código de ética e conduta
-                </Link>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="text-md font-bold mb-4">Contato</h3>
+            <h3 className="text-md font-bold mb-4">Redes</h3>
             <p></p>
             <p></p>
             <div className="text-sm flex space-x-4 mt-4">
-              <a href="https://www.youtube.com/@admadureira_portonacional" className="hover:text-gray-300">
+              <a href="https://www.youtube.com/@admadureira_portonacional" className="hover:text-gray-300" target="_blank" rel="noopener noreferrer">
                 <FaYoutube size={24} />
               </a>
-              <a href="https://www.instagram.com/admadureira_portonacional" className="hover:text-gray-300">
+              <a href="https://www.instagram.com/admadureira_portonacional" className="hover:text-gray-300" target="_blank" rel="noopener noreferrer">
                 <FaInstagram size={24} />
               </a>
             </div>
@@ -307,7 +327,7 @@ const Home = () => {
         <div className="fixed bottom-0 left-0 right-0 bg-gray-800 text-white py-4 px-6 flex justify-between items-center">
           <p className="text-sm">
             Nosso site utiliza cookies para oferecer a você uma melhor experiência. Ao clicar em "Entendi", você declara estar ciente com nossa{' '}
-            <Link href="/politica-de-privacidade" className="underline">
+            <Link href="#" className="underline">
               Política de Privacidade
             </Link>.
           </p>
