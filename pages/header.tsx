@@ -1,0 +1,138 @@
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { LuMenu, LuX } from 'react-icons/lu';
+
+interface MenuItem {
+  name: string;
+  link: string;
+  subcategories?: MenuItem[];
+}
+
+interface HeaderProps {
+  menuItems: MenuItem[];
+}
+
+const Header: React.FC<HeaderProps> = ({ menuItems }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [openSubmenus, setOpenSubmenus] = useState<{ [key: string]: boolean }>({});
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const toggleSubmenu = (name: string) => {
+    setOpenSubmenus((prevState) => ({
+      ...prevState,
+      [name]: !prevState[name]
+    }));
+  };
+
+  const onClose = () => {
+    setIsOpen(false);
+  };
+
+  return (
+    <header className="relative bg-gradient-to-r from-white to-white py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            <div className="flex items-center">
+                <Link href="/" legacyBehavior>
+                    <a className="">
+                        <Image 
+                            src="/img/logo_compacta_color.png" 
+                            alt="CoelhoVendas Logo" 
+                            width={150} 
+                            height={150}
+                            quality={100}
+                            className="object-contain"  
+                        />
+                    </a>
+                </Link>
+            {!isMobile && (
+                <nav className="ml-10 flex space-x-4">
+                {menuItems.map((item) => (
+                    <div className="relative group" key={item.name}>
+                    <Link 
+                        href={item.link} 
+                        className="text-gray-600 px-4 py-2"
+                    >
+                        {item.name}
+                    </Link>
+                    {item.subcategories && (
+                        <div className="absolute left-0 mt-2 w-48 border rounded bg-white shadow-lg z-10 hidden group-hover:block">
+                        {item.subcategories.map((sub) => (
+                            <Link 
+                            key={sub.name} 
+                            href={sub.link} 
+                            className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                            >
+                            {sub.name}
+                            </Link>
+                        ))}
+                        </div>
+                    )}
+                    </div>
+                ))}
+                </nav>
+            )}
+            </div>
+            <div className="flex items-center">
+          {isMobile && (
+            <button onClick={() => setIsOpen(true)} className="text-gray-600 text-3xl">
+              <LuMenu />
+            </button>
+          )}
+            </div>
+        </div>
+        {isMobile && (
+            <div className={`fixed inset-0 z-50 bg-orange-700 overflow-y-auto transition-transform duration-300 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+            <div className="flex flex-col">
+                <div className="flex items-center">
+                <button className="p-4 text-white text-3xl" onClick={onClose}>
+                    <LuX />
+                </button>
+                <img src="/img/logo_compacta_branca.png" alt="Logo" className="h-12" />
+                </div>
+                <hr className="my-1 border-orange-800" />
+                {menuItems.map((item) => (
+                <div key={item.name}>
+                    <div className="block">
+                    <div className={`flex items-center justify-between px-5 py-2 border-b border-orange-800 text-white cursor-pointer`} onClick={() => toggleSubmenu(item.name)}>
+                        <div className="flex items-center">
+                        <span>{item.name}</span>
+                        {item.subcategories && (
+                            <span className="ml-2">
+                            {openSubmenus[item.name] ? '-' : '+'}
+                            </span>
+                        )}
+                        </div>
+                    </div>
+                    {item.subcategories && openSubmenus[item.name] && (
+                        <div className="pl-5">
+                        {item.subcategories.map((sub) => (
+                            <Link key={sub.name} href={sub.link} className="block text-white">
+                            {sub.name}
+                            </Link>
+                        ))}
+                        </div>
+                    )}
+                    </div>
+                </div>
+                ))}
+            </div>
+            </div>
+        )}
+    </header>
+  );
+}
+
+export default Header;
