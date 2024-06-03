@@ -11,9 +11,9 @@ interface IFeedItem {
   permalink: string;
 }
 
-
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [openSubmenus, setOpenSubmenus] = useState<{ [key: string]: boolean }>({});
   const [isMobile, setIsMobile] = useState(false);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [showScrollTopButton, setShowScrollTopButton] = useState(false);
@@ -24,7 +24,17 @@ const Home = () => {
     { name: 'Quem Somos', link: '#planos' },
     { name: 'Nossa Missão', link: '' },
     { name: 'Onde Estamos', link: ''},
-    { name: 'Departamentos', link: ''},
+    { 
+      name: 'Departamentos', 
+      link: '',
+      subcategories: [
+        { name: 'CIBE', link: '#cibe' },
+        { name: 'Deafa', link: '#deafa' },
+        { name: 'EDB', link: '#edb' },
+        { name: 'Infantil', link: '#infantil' },        
+        { name: 'Mocidade', link: '#mocidade' }   
+      ]
+    },
     { name: 'Ofertas', link: ''}
   ];
 
@@ -99,6 +109,13 @@ const Home = () => {
     setIsOpen(false);
   };
 
+  const toggleSubmenu = (name: string) => {
+    setOpenSubmenus((prevState) => ({
+      ...prevState,
+      [name]: !prevState[name]
+    }));
+  };
+
   const handleCookieConsent = () => {
     localStorage.setItem('modal-lgpd', 'true');
     setShowCookieBanner(false);
@@ -108,13 +125,18 @@ const Home = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleLinkClick = () => {
-    setIsOpen(false);
+  const handleLinkClick = (event: React.MouseEvent<HTMLAnchorElement>, hasSubmenu: boolean) => {
+    if (hasSubmenu) {
+      event.preventDefault();
+    } else {
+      setIsOpen(false);
+    }
   };
 
   const currentYear = new Date().getFullYear();
   return (
     <div className="min-h-screen relative">
+
       <header className="relative bg-gradient-to-r from-white to-white py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           <div className="flex items-center">
@@ -127,15 +149,29 @@ const Home = () => {
               className="object-contain"  
             />
             {!isMobile && (
-              <nav className="ml-10 space-x-4">
+              <nav className="ml-10 flex space-x-4">
                 {MenuItems.map(item => (
-                  <Link 
-                    key={item.name} 
-                    href={item.link} 
-                    className="text-gray-600 px-4 py-2"
-                  >
-                    {item.name}
-                  </Link>
+                  <div className="relative group" key={item.name}>
+                    <Link 
+                      href={item.link} 
+                      className="text-gray-600 px-4 py-2"
+                    >
+                      {item.name}
+                    </Link>
+                    {item.subcategories && (
+                      <div className="absolute left-0 mt-2 w-48 border rounded bg-white shadow-lg z-10 hidden group-hover:block">
+                        {item.subcategories.map(sub => (
+                          <Link 
+                            key={sub.name} 
+                            href={sub.link} 
+                            className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                          >
+                            {sub.name}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 ))}
               </nav>
             )}
@@ -149,26 +185,40 @@ const Home = () => {
           </div>
         </div>
         {isMobile && (
-          <div className={`fixed inset-0 z-50 bg-orange-700 overflow-y-auto transition-transform duration-300 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-            <div className="flex flex-col">
-              <div className="flex items-center">
-                <button className="p-4 text-white text-3xl" onClick={onClose}>
-                  <LuX />
-                </button>
-                <img src="/img/logo_compacta_branca.png" alt="Logo" className="h-12" />
-              </div>
-              <hr className="my-1 border-orange-800" />
-              {MenuItems.map(item => (
-                <div key={item.name}>
-                  <a href={item.link} onClick={handleLinkClick} className="block">
-                    <div className={`flex items-center justify-between px-5 py-2 border-b border-orange-800 text-white cursor-pointer`}>
-                      <div className="flex items-center">
-                        <span>{item.name}</span>
-                      </div>
+        <div className={`fixed inset-0 z-50 bg-orange-700 overflow-y-auto transition-transform duration-300 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+          <div className="flex flex-col">
+            <div className="flex items-center">
+              <button className="p-4 text-white text-3xl" onClick={onClose}>
+                <LuX />
+              </button>
+              <img src="/img/logo_compacta_branca.png" alt="Logo" className="h-12" />
+            </div>
+            <hr className="my-1 border-orange-800" />
+            {MenuItems.map(item => (
+              <div key={item.name}>
+                <div className="block">
+                  <div className={`flex items-center justify-between px-5 py-2 border-b border-orange-800 text-white cursor-pointer`} onClick={() => toggleSubmenu(item.name)}>
+                    <div className="flex items-center">
+                      <span>{item.name}</span>
+                      {item.subcategories && (
+                        <span className="ml-2">
+                          {openSubmenus[item.name] ? '-' : '+'}
+                        </span>
+                      )}
                     </div>
-                  </a>
+                  </div>
+                  {item.subcategories && openSubmenus[item.name] && (
+                    <div className="pl-5">
+                      {item.subcategories.map(sub => (
+                        <Link key={sub.name} href={sub.link} className="block text-white">
+                          {sub.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
                 </div>
-              ))}              
+              </div>
+            ))}
             </div>
           </div>
         )}
@@ -222,7 +272,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="bg-white py-12" id="FeedInstagram">
+      {/*<section className="bg-white py-12" id="FeedInstagram">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl text-black-600 text-center font-poppins font-semibold">Instagram</h2>
           <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -239,7 +289,7 @@ const Home = () => {
             ))}
           </div>
         </div>
-      </section>
+          </section>*/}
 
       <section className="bg-slate-50 py-20" id="cultos">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
