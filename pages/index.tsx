@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { LuArrowRight, LuMenu, LuX } from 'react-icons/lu';
-import { FaArrowRight, FaArrowUp, FaCheck, FaCheckCircle, FaFacebook, FaInstagram, FaRocket, FaShoppingBasket, FaWhatsapp } from 'react-icons/fa';
-import { FaSackDollar } from 'react-icons/fa6';
-import { BiError } from 'react-icons/bi';
+import { LuMenu, LuX } from 'react-icons/lu';
+import { FaArrowUp, FaInstagram, FaYoutube } from 'react-icons/fa';
+
 
 const Home = () => {
 
@@ -16,11 +15,10 @@ const Home = () => {
 
   const MenuItems = [
     { name: 'Quem Somos', link: '#planos' },
-    { name: 'Nossa Missção', link: '' },
+    { name: 'Nossa Missão', link: '' },
     { name: 'Onde Estamos', link: ''},
-    { name: 'Departamento', link: ''},
-    { name: 'Ofertas', link: ''},
-    { name: 'Agenda', link: ''}
+    { name: 'Departamentos', link: ''},
+    { name: 'Ofertas', link: ''}
   ];
 
   const cultos = [
@@ -207,7 +205,7 @@ const Home = () => {
 
       <section className="bg-slate-50 py-20" id="cultos">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-black-600 text-center">Nosso Cultos</h2>
+          <h2 className="text-3xl text-black-600 text-center font-poppins font-semibold">Nosso Cultos</h2>
           <p className="mt-4 text-gray-500 text-center">Se não encontrar a resposta abaixo, entre em contato</p>
           <div className="mt-10">
             {cultos.map((cultos, index) => (
@@ -279,10 +277,10 @@ const Home = () => {
             <p></p>
             <p></p>
             <div className="text-sm flex space-x-4 mt-4">
-              <a href="https://facebook.com" className="hover:text-gray-300">
-                <FaFacebook size={24} />
+              <a href="https://www.youtube.com/@admadureira_portonacional" className="hover:text-gray-300">
+                <FaYoutube size={24} />
               </a>
-              <a href="https://instagram.com" className="hover:text-gray-300">
+              <a href="https://www.instagram.com/admadureira_portonacional" className="hover:text-gray-300">
                 <FaInstagram size={24} />
               </a>
             </div>

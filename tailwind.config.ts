@@ -9,7 +9,12 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        'poppins': ['Poppins', 'sans-serif']
+        'poppins': ['Poppins', 'sans-serif'],
+        'roboto': ['Roboto', 'sans-serif'],
+        'uiSansSerif': ['ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        'gilroy-regular': ['Gilroy-Regular', 'sans-serif'],
+        'golos-text': ['Golos Text', 'sans-serif'],
+        'raleway-medium': ['Raleway-Medium', 'sans-serif']
       },
       fontSize: {
         'custom-title': ['28px', '1.4'],
