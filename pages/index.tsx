@@ -82,7 +82,7 @@ const Home = () => {
   }, []);
 
   async function getInstaFeed() {
-    const accessToken = 'IGQWRQS05UUEs4eEpRenY2b1FCNDVtWDExUzYxN1BtNUY5VVZAxLWJ4alV5NVhMaDFqMTg1bkNLVF9JWk9hbWY2RjBmdjdsZAl9VQkpTQi1xLWxaMkxaVjFUMEhfS1gxbTNheHhYb2hCRXlBRUJvYmZAIa1c4aHV4VzgZD'; // Substitua pelo seu token de acesso
+    const accessToken = 'IGQWROMVpLRVN2dkVwN1JBTXNQU2g3dTZA1b1dXOUdoVzdaMlN2dEQ3d1dIbnV4d3E1MFhCOVVpd1ZAmYzJyMllqZA1NEUmNGTWxMR1V6OTZAqN2ViX3gtbmNieHdvX0ZAFQjlHUzBCemoxNFJycnlGNGpwTEVGNnIxQjAZD';
     const fields = "media_url,media_type,permalink";
     const response = await fetch(`https://graph.instagram.com/me/media?access_token=${accessToken}&fields=${fields}`);
     const data = await response.json();
