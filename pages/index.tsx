@@ -3,7 +3,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { LuMenu, LuX } from 'react-icons/lu';
 import { FaArrowUp, FaInstagram, FaYoutube } from 'react-icons/fa';
-import { fetchInstagramStories } from '../lib/instagram';
 
 interface IFeedItem {
   media_type: string;
@@ -19,7 +18,6 @@ const Home = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [showScrollTopButton, setShowScrollTopButton] = useState(false);
   const [showCookieBanner, setShowCookieBanner] = useState(true);
-  const [stories, setStories] = useState([]);
   const [feedList, setFeedList] = useState<IFeedItem[]>([]);
 
   const MenuItems = [
