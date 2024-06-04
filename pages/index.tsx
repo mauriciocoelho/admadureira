@@ -1,8 +1,28 @@
 import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+interface IFeedItem {
+    media_type: string;
+    id: string;
+    media_url: "IMAGE" | "CAROUSEL_ALBUM" | "VIDEO";
+    permalink: string;
+}
 
 const Home = () => {
+    const [feedList, setFeedList] = useState<IFeedItem[]>([]);
+
+    async function getInstaFeed() {
+        const accessToken = 'IGQWROMVpLRVN2dkVwN1JBTXNQU2g3dTZA1b1dXOUdoVzdaMlN2dEQ3d1dIbnV4d3E1MFhCOVVpd1ZAmYzJyMllqZA1NEUmNGTWxMR1V6OTZAqN2ViX3gtbmNieHdvX0ZAFQjlHUzBCemoxNFJycnlGNGpwTEVGNnIxQjAZD';
+        const fields = "media_url,media_type,permalink";
+        const response = await fetch(`https://graph.instagram.com/me/media?access_token=${accessToken}&fields=${fields}`);
+        const data = await response.json();
+        setFeedList(data.data);
+    }
+      
+    useEffect(() => {    
+        getInstaFeed();
+    }, []);
+
     const [openIndex, setOpenIndex] = useState<number | null>(null);
 
     const togglecultos = (index: number) => {
