@@ -67,17 +67,6 @@ const Home = () => {
                 `}</style>
             </main>
 
-            <section className="relative bg-gradient-to-r from-orange-950 to-orange-800 py-20 text-white text-center" id="cta-2">
-                <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 className="text-4xl font-bold mb-4">Deseja aceitar a Jesus Cristo como seu salvador?</h2>
-                <div className="flex flex-col sm:flex-row items-center justify-center">
-                    <Link href="/cadastro" className="bg-transparent border border-orange-600 text-white px-6 py-3 rounded-md text-md mb-4 sm:mb-0 sm:mr-4 transition-transform transform hover:scale-110 hover:shadow-xl flex items-center">
-                    Sim! Eu Desejo
-                    </Link>
-                </div>
-                </div>
-            </section>
-
             {/*<section className="bg-white py-12" id="FeedInstagram">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <h2 className="text-3xl text-black-600 text-center font-poppins font-semibold">Instagram</h2>
