@@ -54,12 +54,13 @@ const Header: React.FC<HeaderProps> = ({ menuItems }) => {
                             height={150}
                             quality={100}
                             className="object-contain"  
+                            fetchPriority="high"
                         />
                     </a>
                 </Link>
             {!isMobile && (
                 <nav className="ml-10 flex space-x-4">
-                {menuItems.map((item) => (
+                {menuItems && menuItems.map((item) => (
                     <div className="relative group" key={item.name}>
                     <Link 
                         href={item.link} 
@@ -103,7 +104,7 @@ const Header: React.FC<HeaderProps> = ({ menuItems }) => {
                 <img src="/img/logo_compacta_branca.png" alt="Logo" className="h-12" />
                 </div>
                 <hr className="my-1 border-orange-800" />
-                {menuItems.map((item) => (
+                {menuItems && menuItems.map((item) => (
                 <div key={item.name}>
                     <div className="block">
                     <div className={`flex items-center justify-between px-5 py-2 border-b border-orange-800 text-white cursor-pointer`} onClick={() => toggleSubmenu(item.name)}>

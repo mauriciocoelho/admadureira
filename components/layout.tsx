@@ -1,20 +1,12 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { FaArrowUp } from 'react-icons/fa';
-import Footer from './footer';
 import Header from './header';
+import Footer from './footer';
 
 interface LayoutProps {
   children: ReactNode;
 }
-
-interface IFeedItem {
-  media_type: string;
-  id: string;
-  media_url: string; // Corrigi o tipo para string
-  permalink: string;
-}
-
 interface MenuItem {
   name: string;
   link: string;
@@ -23,12 +15,10 @@ interface MenuItem {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [showScrollTopButton, setShowScrollTopButton] = useState(false);
-  const [showCookieBanner, setShowCookieBanner] = useState(true);
-  const [feedList, setFeedList] = useState<IFeedItem[]>([]);
+  const [showCookieBanner, setShowCookieBanner] = useState(true); 
 
   const MenuItems: MenuItem[] = [
-    { name: 'Quem Somos', link: '' },
-    { name: 'Nossa Missão', link: '' },
+    { name: 'Quem Somos', link: '/quem-somos' },
     { name: 'Onde Estamos', link: '/onde-estamos' },
     {
       name: 'Departamentos',
@@ -42,19 +32,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         { name: 'Mocidade', link: '#mocidade' }
       ]
     },
-    { name: 'Ofertas', link: '' }
-  ];
-
-  async function getInstaFeed() {
-    const accessToken = 'IGQWROMVpLRVN2dkVwN1JBTXNQU2g3dTZA1b1dXOUdoVzdaMlN2dEQ3d1dIbnV4d3E1MFhCOVVpd1ZAmYzJyMllqZA1NEUmNGTWxMR1V6OTZAqN2ViX3gtbmNieHdvX0ZAFQjlHUzBCemoxNFJycnlGNGpwTEVGNnIxQjAZD';
-    const fields = 'media_url,media_type,permalink';
-    const response = await fetch(`https://graph.instagram.com/me/media?access_token=${accessToken}&fields=${fields}`);
-    const data = await response.json();
-    setFeedList(data.data);
-  }
+    { name: 'Ofertas', link: '/ofertas' }
+  ];  
 
   useEffect(() => {
-    getInstaFeed();
     const cookieConsent = localStorage.getItem('modal-lgpd');
     if (cookieConsent === 'true') {
       setShowCookieBanner(false);

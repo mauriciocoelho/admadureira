@@ -1,10 +1,7 @@
 import Image from "next/image";
-import { useRouter } from "next/router";
 
 const OndeEstamos = () => {
-
-    const router = useRouter();
-
+    
     const locations = [
         { name: 'Matriz', imgSrc: '/img/matriz.png', link: 'https://www.google.com/maps/@-10.7064984,-48.4070015,3a,86.4y,126.15h,86.3t/data=!3m6!1e1!3m4!1sdQNbF1hGrbpMQ7b9YJUYGQ!2e0!7i16384!8i8192?coh=205409&entry=ttu' },
         { name: 'Boas Novas', imgSrc: '/img/fama.png' },
@@ -14,14 +11,10 @@ const OndeEstamos = () => {
         { name: 'Nova Jeruzalém', imgSrc: '/img/nova_jerusalem.png' },
     ];
 
-    const handleClick = (link: string) => {
-        router.push(link);
-    };
-
     return (
         <section className="bg-white py-12" id="cta-2">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 className="text-3xl text-black-600 text-center font-poppins font-semibold">Instagram</h2>
+                <h2 className="text-3xl text-black-600 text-center font-poppins font-semibold">Onde Estamos</h2>
                 <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     {locations.map((location, index) => (
                         <a 
