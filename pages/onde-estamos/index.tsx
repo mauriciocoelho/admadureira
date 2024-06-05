@@ -11,7 +11,7 @@ const OndeEstamos = () => {
         { name: 'Filadélfia', imgSrc: '' },
         { name: 'Genezaré', imgSrc: '' },
         { name: 'Imperial', imgSrc: '/img/imperial.png', link: 'https://www.google.com/maps/@-10.7360586,-48.4023884,3a,75y,79.96h,94.52t/data=!3m6!1e1!3m4!1sF-1RR0SG8m-QGEUdlpHiag!2e0!7i13312!8i6656?coh=205409&entry=ttu' },
-        { name: 'Jardim América', imgSrc: '/img/fama.png' },
+        { name: 'Jardim América', imgSrc: '' },
         { name: 'Manancial', imgSrc: '/img/parqueeldorado.png', link: 'https://www.google.com/maps/@-10.7325103,-48.386455,3a,75y,121.39h,78.65t/data=!3m6!1e1!3m4!1si1a-tKpiWkVC6pF5kaCllw!2e0!7i16384!8i8192?coh=205409&entry=ttu' },
         { name: 'Maranata', imgSrc: '/img/maranata.png', link: 'https://www.google.com/maps/@-10.7277005,-48.411361,3a,90y,239.73h,88.93t/data=!3m6!1e1!3m4!1ses7yBcCcIhqJxwvP9DhUWQ!2e0!7i13312!8i6656?coh=205409&entry=ttu' },
         { name: 'Monte Sião', imgSrc: '' },
