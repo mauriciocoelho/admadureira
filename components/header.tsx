@@ -41,97 +41,110 @@ const Header: React.FC<HeaderProps> = ({ menuItems }) => {
     setIsOpen(false);
   };
 
+  const handleLinkClick = () => {
+    onClose();
+  };
+
   return (
     <header className="relative bg-gradient-to-r from-white to-white py-4">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-            <div className="flex items-center">
-                <Link href="/" legacyBehavior>
-                    <a className="">
-                        <Image 
-                            src="/img/logo_compacta_color.png" 
-                            alt="CoelhoVendas Logo" 
-                            width={150} 
-                            height={150}
-                            quality={100}
-                            className="object-contain"  
-                            fetchPriority="high"
-                        />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+        <div className="flex items-center">
+          <Link href="/" legacyBehavior>
+            <a>
+              <Image
+                src="/img/logo_compacta_color.png"
+                alt="CoelhoVendas Logo"
+                width={150}
+                height={150}
+                quality={100}
+                className="object-contain"
+                fetchPriority="high"
+              />
+            </a>
+          </Link>
+          {!isMobile && (
+            <nav className="ml-10 flex space-x-4">
+              {menuItems && menuItems.map((item) => (
+                <div className="relative group" key={item.name}>
+                  <Link href={item.link} legacyBehavior>
+                    <a className="text-gray-600 px-4 py-2">
+                      {item.name}
                     </a>
-                </Link>
-            {!isMobile && (
-                <nav className="ml-10 flex space-x-4">
-                {menuItems && menuItems.map((item) => (
-                    <div className="relative group" key={item.name}>
-                    <Link 
-                        href={item.link} 
-                        className="text-gray-600 px-4 py-2"
-                    >
-                        {item.name}
-                    </Link>
-                    {item.subcategories && (
-                        <div className="absolute left-0 mt-2 w-48 border rounded bg-white shadow-lg z-10 hidden group-hover:block">
-                        {item.subcategories.map((sub) => (
-                            <Link 
-                            key={sub.name} 
-                            href={sub.link} 
-                            className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-                            >
+                  </Link>
+                  {item.subcategories && (
+                    <div className="absolute left-0 mt-2 w-48 border rounded bg-white shadow-lg z-10 hidden group-hover:block">
+                      {item.subcategories.map((sub) => (
+                        <Link key={sub.name} href={sub.link} legacyBehavior>
+                          <a className="block px-4 py-2 text-gray-800 hover:bg-gray-200">
                             {sub.name}
-                            </Link>
-                        ))}
-                        </div>
-                    )}
+                          </a>
+                        </Link>
+                      ))}
                     </div>
-                ))}
-                </nav>
-            )}
-            </div>
-            <div className="flex items-center">
+                  )}
+                </div>
+              ))}
+            </nav>
+          )}
+        </div>
+        <div className="flex items-center">
           {isMobile && (
             <button onClick={() => setIsOpen(true)} className="text-gray-600 text-3xl">
               <LuMenu />
             </button>
           )}
-            </div>
         </div>
-        {isMobile && (
-            <div className={`fixed inset-0 z-50 bg-orange-700 overflow-y-auto transition-transform duration-300 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-            <div className="flex flex-col">
-                <div className="flex items-center">
-                <button className="p-4 text-white text-3xl" onClick={onClose}>
-                    <LuX />
-                </button>
-                <img src="/img/logo_compacta_branca.png" alt="Logo" className="h-12" />
-                </div>
-                <hr className="my-1 border-orange-800" />
-                {menuItems && menuItems.map((item) => (
-                <div key={item.name}>
-                    <div className="block">
-                    <div className={`flex items-center justify-between px-5 py-2 border-b border-orange-800 text-white cursor-pointer`} onClick={() => toggleSubmenu(item.name)}>
-                        <div className="flex items-center">
-                        <span>{item.name}</span>
-                        {item.subcategories && (
-                            <span className="ml-2">
-                            {openSubmenus[item.name] ? '-' : '+'}
-                            </span>
-                        )}
-                        </div>
+      </div>
+      {isMobile && (
+        <div className={`fixed inset-0 z-50 bg-orange-700 overflow-y-auto transition-transform duration-300 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+          <div className="flex flex-col">
+            <div className="flex items-center justify-between p-4">
+              <button className="text-white text-3xl" onClick={onClose}>
+                <LuX />
+              </button>
+              <Image
+                src="/img/logo_compacta_branca.png"
+                alt="Logo"
+                width={100}
+                height={50}
+                className="object-contain"
+              />
+            </div>
+            <hr className="my-1 border-orange-800" />
+            {menuItems && menuItems.map((item) => (
+              <div key={item.name}>
+                <div className="block">
+                  <div className="flex items-center justify-between px-5 py-2 border-b border-orange-800 text-white cursor-pointer" onClick={() => toggleSubmenu(item.name)}>
+                    <div className="flex items-center">
+                      <Link href={item.link} legacyBehavior>
+                        <a onClick={handleLinkClick}>
+                          <span>{item.name}</span>
+                        </a>
+                      </Link>
+                      {item.subcategories && (
+                        <span className="ml-2">
+                          {openSubmenus[item.name] ? '-' : '+'}
+                        </span>
+                      )}
                     </div>
-                    {item.subcategories && openSubmenus[item.name] && (
-                        <div className="pl-5">
-                        {item.subcategories.map((sub) => (
-                            <Link key={sub.name} href={sub.link} className="block text-white">
+                  </div>
+                  {item.subcategories && openSubmenus[item.name] && (
+                    <div className="pl-5">
+                      {item.subcategories.map((sub) => (
+                        <Link key={sub.name} href={sub.link} legacyBehavior>
+                          <a className="block text-white" onClick={handleLinkClick}>
                             {sub.name}
-                            </Link>
-                        ))}
-                        </div>
-                    )}
+                          </a>
+                        </Link>
+                      ))}
                     </div>
+                  )}
                 </div>
-                ))}
-            </div>
-            </div>
-        )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </header>
   );
 }
