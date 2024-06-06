@@ -5,7 +5,9 @@ const OndeEstamos = () => {
     
     const locations = [
         { name: 'Matriz', imgSrc: '/img/congregacao/matriz.png', link: 'https://www.google.com/maps/@-10.7064984,-48.4070015,3a,86.4y,126.15h,86.3t/data=!3m6!1e1!3m4!1sdQNbF1hGrbpMQ7b9YJUYGQ!2e0!7i16384!8i8192?coh=205409&entry=ttu' },
-        { name: 'Betesda', imgSrc: 'betesda.png' },
+        { name: 'Amor em Cristo', imgSrc: '' },
+        { name: 'Betel', imgSrc: '' },
+        { name: 'Betesda', imgSrc: '/img/congregacao/betesda.png' },
         { name: 'Boas Novas', imgSrc: '/img/congregacao/boas_novas.png', link: 'https://www.google.com/maps/@-10.73154,-48.3959865,3a,75y,253.73h,83.28t/data=!3m6!1e1!3m4!1s-WZTs6A99DxkQB0MvHv6bQ!2e0!7i16384!8i8192?coh=205409&entry=ttu' },
         { name: 'Fama', imgSrc: '/img/congregacao/fama.png', link: 'https://www.google.com/maps/@-10.7228636,-48.3935324,3a,84.4y,103.12h,93.7t/data=!3m6!1e1!3m4!1sLmGihMGzoYDpXN-ge8wlbQ!2e0!7i16384!8i8192?coh=205409&entry=ttu' },
         { name: 'Familia Feliz', imgSrc: '' },
@@ -17,6 +19,7 @@ const OndeEstamos = () => {
         { name: 'Shekinah', imgSrc: '' },
         { name: 'Maranata', imgSrc: '/img/congregacao/maranata.png', link: 'https://www.google.com/maps/@-10.7277005,-48.411361,3a,90y,239.73h,88.93t/data=!3m6!1e1!3m4!1ses7yBcCcIhqJxwvP9DhUWQ!2e0!7i13312!8i6656?coh=205409&entry=ttu' },
         { name: 'Monte Carmelo', imgSrc: '/img/congregacao/monte_carmelo.png', link: 'https://www.google.com/maps/@-10.762821,-48.1106876,3a,75y,18.05h,83.72t/data=!3m6!1e1!3m4!1syVyJlWhWYIfEFglQpMbEKw!2e0!7i16384!8i8192?coh=205409&entry=ttu' },
+        { name: 'Monte Moriá', imgSrc: '' },
         { name: 'Monte Sião', imgSrc: '' },
         { name: 'Nova Canaãa', imgSrc: '/img/congregacao/nova_canaa.png', link: 'https://www.google.com/maps/@-10.6762242,-48.4088893,3a,75y,272.97h,80.78t/data=!3m6!1e1!3m4!1scmOcXegh3-Pg1zrko8lE-w!2e0!7i16384!8i8192?coh=205409&entry=ttu' },
         { name: 'Nova Jeruzalém', imgSrc: '/img/congregacao/nova_jerusalem.png', link: 'https://www.google.com/maps/@-10.6775454,-48.3979944,3a,75y,273.5h,85.07t/data=!3m6!1e1!3m4!1sb5umpqHzY9dQUDB5S62kgA!2e0!7i13312!8i6656?coh=205409&entry=ttu' },
