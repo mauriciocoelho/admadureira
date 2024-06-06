@@ -5,6 +5,7 @@ const OndeEstamos = () => {
     
     const locations = [
         { name: 'Matriz', imgSrc: '/img/congregacao/matriz.png', link: 'https://www.google.com/maps/@-10.7064984,-48.4070015,3a,86.4y,126.15h,86.3t/data=!3m6!1e1!3m4!1sdQNbF1hGrbpMQ7b9YJUYGQ!2e0!7i16384!8i8192?coh=205409&entry=ttu' },
+        { name: 'Betesda', imgSrc: 'betesda.png' },
         { name: 'Boas Novas', imgSrc: '/img/congregacao/boas_novas.png', link: 'https://www.google.com/maps/@-10.73154,-48.3959865,3a,75y,253.73h,83.28t/data=!3m6!1e1!3m4!1s-WZTs6A99DxkQB0MvHv6bQ!2e0!7i16384!8i8192?coh=205409&entry=ttu' },
         { name: 'Fama', imgSrc: '/img/congregacao/fama.png', link: 'https://www.google.com/maps/@-10.7228636,-48.3935324,3a,84.4y,103.12h,93.7t/data=!3m6!1e1!3m4!1sLmGihMGzoYDpXN-ge8wlbQ!2e0!7i16384!8i8192?coh=205409&entry=ttu' },
         { name: 'Familia Feliz', imgSrc: '' },
