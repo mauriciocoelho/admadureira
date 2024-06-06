@@ -25,14 +25,14 @@ const OndeEstamos = () => {
         <section className="bg-white py-12">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 className="text-3xl text-black-600 text-center font-poppins font-semibold">Onde Estamos</h2>
-                <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-items-center">
+                <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-items-center ">
                     {locations.map((location, index) => (
                         <a 
                             key={index} 
                             href={location.link} 
                             target="_blank" 
                             rel="noopener noreferrer"
-                            className="relative block"
+                            className="relative block transform transition-transform duration-300 hover:scale-105" 
                         >
                             <Image
                                 src={location.imgSrc}
