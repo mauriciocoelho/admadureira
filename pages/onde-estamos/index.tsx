@@ -18,7 +18,7 @@ const OndeEstamos = () => {
         { name: 'Monte Carmelo', imgSrc: '/img/congregacao/monte_carmelo.png', link: 'https://www.google.com/maps/@-10.762821,-48.1106876,3a,75y,18.05h,83.72t/data=!3m6!1e1!3m4!1syVyJlWhWYIfEFglQpMbEKw!2e0!7i16384!8i8192?coh=205409&entry=ttu' },
         { name: 'Monte Sião', imgSrc: '' },
         { name: 'Nova Canaãa', imgSrc: '/img/congregacao/nova_canaa.png', link: 'https://www.google.com/maps/@-10.6762242,-48.4088893,3a,75y,272.97h,80.78t/data=!3m6!1e1!3m4!1scmOcXegh3-Pg1zrko8lE-w!2e0!7i16384!8i8192?coh=205409&entry=ttu' },
-        { name: 'Nova Jeruzalém', imgSrc: '/img/congregacao/nova_jerusalem.png' },
+        { name: 'Nova Jeruzalém', imgSrc: '/img/congregacao/nova_jerusalem.png', link: 'https://www.google.com/maps/@-10.6775454,-48.3979944,3a,75y,273.5h,85.07t/data=!3m6!1e1!3m4!1sb5umpqHzY9dQUDB5S62kgA!2e0!7i13312!8i6656?coh=205409&entry=ttu' },
         { name: 'Vila Nova', imgSrc: '/img/congregacao/vila_nova.png', link: 'https://www.google.com/maps/@-10.6883695,-48.406503,3a,75y,290.12h,85.22t/data=!3m6!1e1!3m4!1sC1gFuwvsE2Ppxp4j0DNAYA!2e0!7i16384!8i8192?coh=205409&entry=ttu' },
     ];
 
