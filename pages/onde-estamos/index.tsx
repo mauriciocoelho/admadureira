@@ -17,6 +17,7 @@ const OndeEstamos = () => {
         { name: 'Jardim América', imgSrc: '', link: 'https://www.google.com/maps/@-10.6964346,-48.3979808,3a,75y,340.74h,76.35t/data=!3m6!1e1!3m4!1scLEodbxyETierUmbMj4KiA!2e0!7i13312!8i6656?coh=205409&entry=ttu' },
         { name: 'Pentecostes', imgSrc: '/img/congregacao/pentecostes.png', link: 'https://www.google.com/maps/@-10.7325103,-48.386455,3a,75y,121.39h,78.65t/data=!3m6!1e1!3m4!1si1a-tKpiWkVC6pF5kaCllw!2e0!7i16384!8i8192?coh=205409&entry=ttu' },
         { name: 'Shekinah', imgSrc: '' },
+        { name: 'Manancial', imgSrc: '/img/congregacao/manancial.png' },        
         { name: 'Maranata', imgSrc: '/img/congregacao/maranata.png', link: 'https://www.google.com/maps/@-10.7277005,-48.411361,3a,90y,239.73h,88.93t/data=!3m6!1e1!3m4!1ses7yBcCcIhqJxwvP9DhUWQ!2e0!7i13312!8i6656?coh=205409&entry=ttu' },
         { name: 'Monte Carmelo', imgSrc: '/img/congregacao/monte_carmelo.png', link: 'https://www.google.com/maps/@-10.762821,-48.1106876,3a,75y,18.05h,83.72t/data=!3m6!1e1!3m4!1syVyJlWhWYIfEFglQpMbEKw!2e0!7i16384!8i8192?coh=205409&entry=ttu' },
         { name: 'Monte Moriá', imgSrc: '' },
