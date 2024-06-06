@@ -102,13 +102,17 @@ const Header: React.FC<HeaderProps> = ({ menuItems }) => {
               <button className="text-white text-3xl" onClick={onClose}>
                 <LuX />
               </button>
-              <Image
-                src="/img/logo_compacta_branca.png"
-                alt="Logo"
-                width={100}
-                height={50}
-                className="object-contain"
-              />
+              <Link href="/" legacyBehavior>
+                <a onClick={handleLinkClick}>
+                  <Image
+                    src="/img/logo_compacta_branca.png"
+                    alt="Logo"
+                    width={100}
+                    height={50}
+                    className="object-contain"
+                  />
+                </a>
+              </Link>
             </div>
             <hr className="my-1 border-orange-800" />
             {menuItems && menuItems.map((item) => (

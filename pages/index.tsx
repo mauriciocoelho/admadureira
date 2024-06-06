@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 interface IFeedItem {
     media_type: string;
     id: string;
-    media_url: string; // Corrigido o tipo de media_url para string
+    media_url: string;
     permalink: string;
 }
 
