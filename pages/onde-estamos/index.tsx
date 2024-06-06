@@ -9,6 +9,7 @@ const OndeEstamos = () => {
         { name: 'Betel', imgSrc: '' },
         { name: 'Betesda', imgSrc: '/img/congregacao/betesda.png' },
         { name: 'Boas Novas', imgSrc: '/img/congregacao/boas_novas.png', link: 'https://www.google.com/maps/@-10.73154,-48.3959865,3a,75y,253.73h,83.28t/data=!3m6!1e1!3m4!1s-WZTs6A99DxkQB0MvHv6bQ!2e0!7i16384!8i8192?coh=205409&entry=ttu' },
+        { name: 'El Shaday', imgSrc: '' },
         { name: 'Fama', imgSrc: '/img/congregacao/fama.png', link: 'https://www.google.com/maps/@-10.7228636,-48.3935324,3a,84.4y,103.12h,93.7t/data=!3m6!1e1!3m4!1sLmGihMGzoYDpXN-ge8wlbQ!2e0!7i16384!8i8192?coh=205409&entry=ttu' },
         { name: 'Familia Feliz', imgSrc: '' },
         { name: 'Filadélfia', imgSrc: '/img/congregacao/filadelfia.png' },
