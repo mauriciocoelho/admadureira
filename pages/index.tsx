@@ -14,7 +14,7 @@ const Home = () => {
     const [loading, setLoading] = useState(true);
 
     async function getInstaFeed() {
-        const accessToken = 'IGQWROZAjVUZAWhvZA1BhVVZA5R2VVUGlnU1VzNGZAvbnVXVG5PazJHaUtxbWNRSE5qbVNiVHFCb2RBUE5YS2VFWVBDX3Fyd2p6WG5DSjRlUV81ZA0FualRkd21FbngyZAGttVVdrZAHlyUWJBSGdFeHVBS0RYZAnBzdTJpYm8ZD';
+        const accessToken = 'IGQWRNR25wazgzM2NkQnBuWkhfUW5qSW11eHpkSkt6X0ptTHhVZA2xnLWNsUUlhZAmpYVG5RY2xmU1M4NjlWQ3pXa1NJWlBPWGl4VHF6U1lHTEpZAc2lURXB0T0hGTHZA1ZA0ZAUYWhxU0htR3VsRUY1QkNINUJhSHJQbDAZD';
         const fields = "media_url,media_type,permalink";
         const response = await fetch(`https://graph.instagram.com/me/media?access_token=${accessToken}&fields=${fields}`);
         const data = await response.json();
@@ -100,16 +100,16 @@ const Home = () => {
             </main>
             {!loading && (
                 <>
-                    {/*<section className="bg-white py-12" id="FeedInstagram">
+                    <section className="bg-white py-12" id="FeedInstagram">
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                             <h2 className="text-3xl text-black-600 text-center font-poppins font-semibold">Instagram</h2>
                             <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                                 {feedList.slice(0, 12).map(item => (
                                 <a key={item.id} href={item.permalink} target='_blank' rel='noopener noreferrer' className="block overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
                                     {item.media_type === "IMAGE" || item.media_type === "CAROUSEL_ALBUM" ? (
-                                    <img src={item.media_url} alt="Instagram Feed" className="w-full h-full object-cover" />
+                                    <img src={item.media_url} alt="Instagram Feed" className="w-full h-full object-cover transform transition-transform duration-300 hover:scale-105" />
                                     ) : (
-                                    <video controls className="w-full h-full object-cover">
+                                    <video controls className="w-full h-full object-cover transform transition-transform duration-300 hover:scale-105">
                                         <source src={item.media_url} />
                                     </video>
                                     )}
@@ -117,7 +117,7 @@ const Home = () => {
                                 ))}
                             </div>
                         </div>
-                            </section>*/}
+                    </section>
 
                     <section className="bg-slate-50 py-20" id="cultos">
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
