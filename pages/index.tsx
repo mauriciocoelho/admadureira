@@ -23,7 +23,8 @@ const Home = () => {
     const [versiculos, setVersiculos] = useState<Versiculo[]>([]);
 
     async function getInstaFeed() {
-        const accessToken = ''
+        const accessToken = 'IGQWRNaldsZA2F0WVVNa0RfNEVQUVZAqWUxJd21kdW9OaTVaUDhmQVpQLThXY0dPaVcta1ltVGl0cmxYWWtvNlhmT295SU1UM1lSU0pocVZAURk92QmFOZAm9xdXh4Qkc2QmVhX3RkenpIT2FMa2hkX2xubEFNb0xOcXcZD5';
+        const fields = "media_url,media_type,permalink";
         const response = await fetch(`https://graph.instagram.com/me/media?access_token=${accessToken}&fields=${fields}`);
         const data = await response.json();
         setFeedList(data.data);
