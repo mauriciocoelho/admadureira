@@ -57,4 +57,8 @@ const OndeEstamos = () => {
     );
 }
 
+OndeEstamos.getInitialProps = async () => {
+    return { title: "Onde Estamos" };
+};
+
 export default OndeEstamos;

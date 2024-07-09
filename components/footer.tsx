@@ -53,6 +53,18 @@ interface MenuItem {
                         </a>
                     </div>
                 </div>
+                <div>
+                    <a href="https://conemadto.com.br/" target="_blank" rel="noopener noreferrer">
+                        <Image
+                            src="/img/logo_conemad_to.png" 
+                            alt="Conemad-TO Logo" 
+                            width={100} 
+                            height={100} 
+                            quality={100}
+                            className="object-contain" 
+                        />
+                    </a>
+                </div>
             </div>
             <div className="text-xs text-center mt-8 text-white">
                 <hr className="my-4 border-orange-800" />

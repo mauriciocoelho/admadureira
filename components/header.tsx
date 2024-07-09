@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { LuMenu, LuX } from 'react-icons/lu';
+import AudioButton from './AudioButton';
 
 interface MenuItem {
   name: string;
@@ -53,7 +54,7 @@ const Header: React.FC<HeaderProps> = ({ menuItems }) => {
             <a>
               <Image
                 src="/img/logo_compacta_color.png"
-                alt="CoelhoVendas Logo"
+                alt="AdMadureira Logo"
                 width={150}
                 height={150}
                 quality={100}
@@ -85,8 +86,9 @@ const Header: React.FC<HeaderProps> = ({ menuItems }) => {
                 </div>
               ))}
             </nav>
-          )}
+          )}          
         </div>
+        <AudioButton />        
         <div className="flex items-center">
           {isMobile && (
             <button onClick={() => setIsOpen(true)} className="text-gray-600 text-3xl">
