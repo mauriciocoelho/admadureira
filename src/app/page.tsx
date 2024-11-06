@@ -6,6 +6,7 @@ import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import LoadSpinner from "@/components/LoadSpinner";
 import TypingEffect from "@/components/TypingEffect";
+import Link from "next/link";
 
 interface IFeedItem {
     media_type: string;
@@ -98,9 +99,33 @@ export default function Home() {
                             infiniteLoop={true}
                             showThumbs={false}
                             showStatus={false}
-                            interval={5000}
+                            interval={6000}
                             className="carousel"
                         >
+                            <div className="relative carousel-slide h-[80vh]"> 
+                                <Image
+                                    src="/img/banner_deafa.png"
+                                    alt="Conferência da Família"
+                                    layout="fill"
+                                    objectFit="cover"
+                                    quality={100}
+                                    className="object-cover"
+                                    style={{ objectPosition: 'top' }} // Mantém o foco na parte superior da imagem
+                                />
+                                <div className="absolute inset-0 flex flex-col justify-end items-start bg-gradient-to-b from-transparent to-black p-8 text-container">
+                                    <h1 className="text-4xl font-bold text-white mb-4 animate-slide-up">Conferência da Família</h1>
+                                    <p className="text-white text-lg mb-4 animate-slide-up text-justify">
+                                        Participe da nossa Conferência da Família, nos dias <strong>23 e 24 de Novembro</strong>, às <strong>19h</strong> no Templo Matriz. <br />
+                                        Tema: "Perdidos dentro de casa? Deus pode transformar famílias disfuncionais." <br />
+                                        Venha e traga sua família para momentos de renovação e esperança.
+                                    </p>
+                                    <a href="/admnews/conferencia-familia" className="px-6 py-3 bg-green-600 text-white font-semibold rounded-md hover:bg-green-700 transition duration-300 animate-slide-up">
+                                        Saiba Mais →
+                                    </a>
+                                </div>
+                            </div>
+
+
                             <div className="relative carousel-slide">
                                 <Image
                                     src="/img/pr_pra.png"
@@ -299,6 +324,15 @@ export default function Home() {
                                     <p className="text-sm text-orange-500">{versiculo.reference}</p>
                                 </div>
                             ))}
+                            {/* Botão Devocional Diário */}
+                            {/*<div className="mt-8 flex">
+                                <a
+                                    href="/devocional-diario"
+                                    className="px-6 py-3 bg-[#FF6F31] text-white rounded-lg shadow hover:bg-orange-600 transition duration-300"
+                                >
+                                    Devocional Diário
+                                </a>
+                            </div>*/}
                         </div>
                     </section>
 
@@ -339,9 +373,75 @@ export default function Home() {
                         `}</style>
                     </section> */}
 
+                    {/* AD NEWS */}
+                    {/* <section
+                        className="relative bg-cover bg-center py-20 text-white text-center"
+                        id="youtube"
+                        style={{ backgroundImage: "url('/img/banner_youtube.png')" }}
+                    >
+                        <div className="absolute inset-0 bg-black opacity-70"></div>
+                        
+                        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+                            <h2 className="text-3xl text-white text-center font-poppins font-semibold mb-10">AD News</h2>
+    
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            
+                            
+                            <Link href="/admnews/conferencia-familia" className="block bg-white text-black rounded-lg overflow-hidden shadow-md">
+                                <Image
+                                    src="/img/banner_deafa.png"
+                                    alt="Conferência da Família"
+                                    width={400}
+                                    height={250}
+                                    className="w-full h-48 object-cover"
+                                />
+                                <div className="p-4">
+                                    <h3 className="text-lg font-bold">Conferência da Família - Tema e Propósito</h3>
+                                    <p className="text-sm text-gray-500">📅 5 de novembro de 2024</p>
+                                    <p className="text-gray-700 mt-2">
+                                        A Conferência da Família será uma oportunidade única de crescimento e renovação espiritual. Com o tema "Perdidos dentro de casa?", o evento busca fortalecer os laços familiares e proporcionar momentos de edificação e comunhão. Venha e traga sua família!
+                                    </p>
+                                    <p className="text-blue-600 mt-2 font-semibold">SAIBA MAIS »</p>
+                                </div>
+                            </Link>
+
+                            
+                            <Link href="/admnews/congresso-jovens" className="block bg-white text-black rounded-lg overflow-hidden shadow-md">
+                                <Image
+                                    src="/img/banner_deafa.png"
+                                    alt="Congresso de Jovens"
+                                    width={400}
+                                    height={250}
+                                    className="w-full h-48 object-cover"
+                                />
+                                <div className="p-4">
+                                    <h3 className="text-lg font-bold">Congresso Jovens</h3>
+                                    <p className="text-sm text-gray-500">📅 5 de novembro de 2024</p>
+                                    <p className="text-gray-700 mt-2">
+                                        O Congresso Jovens é um evento que proporciona momentos de reflexão, crescimento espiritual e comunhão entre jovens de várias localidades. Participe e seja renovado em espírito!
+                                    </p>
+                                    <p className="text-blue-600 mt-2 font-semibold">SAIBA MAIS »</p>
+                                </div>
+                            </Link>
+
+                            </div>
+
+
+                            <div className="mt-10">
+                                <button className="px-6 py-3 bg-white text-black font-semibold rounded-md hover:bg-gray-200">
+                                    Ver mais notícias →
+                                </button>
+                            </div>
+                        </div>
+                    </section> */}
+                    
                     {/* YouTube */}
                     <section className="relative bg-gradient-to-r from-orange-950 to-orange-800 py-20 text-white text-center" id="youtube">
-                        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-center">
+                        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+                            <div className="mb-6">
+                                <p className="text-sm uppercase">Acesse o canal da AD Madureira no Youtube</p>
+                                <h2 className="text-3xl font-bold">Acompanhe os cultos da AD Madureira no nosso canal do Youtube</h2>
+                            </div>
                             <div className="flex flex-col md:flex-row items-center">
                                 <div className="mb-8 md:mb-0 md:mr-8">
                                     <iframe
@@ -353,16 +453,35 @@ export default function Home() {
                                         allowFullScreen
                                     ></iframe>
                                 </div>
-                                <div>
-                                    <iframe
-                                        className="responsiveIframe"
-                                        src="https://www.youtube.com/embed/uc7yymDFIcI"
-                                        title="YouTube video player"
-                                        frameBorder="0"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                        allowFullScreen
-                                    ></iframe>
-                                </div>
+                            <div>
+                                <iframe
+                                    className="responsiveIframe"
+                                    src="https://www.youtube.com/embed/uc7yymDFIcI"
+                                    title="YouTube video player"
+                                    frameBorder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                ></iframe>
+                            </div>
+                            </div>
+                            <div className="mt-8">
+                                <a
+                                    href="https://www.youtube.com/@admadureira_portonacional"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center px-6 py-3 bg-orange-500 text-white font-semibold rounded-md hover:bg-orange-600"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="currentColor"
+                                        viewBox="0 0 24 24"
+                                        className="w-5 h-5 mr-2"
+                                    >
+                                        <path d="M10 15l5-3-5-3v6z" />
+                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+                                    </svg>
+                                    Se inscreva agora no Youtube
+                                </a>
                             </div>
                         </div>
                         <style jsx>{`

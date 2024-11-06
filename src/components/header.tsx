@@ -49,7 +49,7 @@ const Header: React.FC<HeaderProps> = ({ menuItems }) => {
 
   return (
     <header className="relative bg-gradient-to-r from-white to-white py-4">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+      <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 flex justify-center items-center">
         <div className="flex items-center">
           <Link href="/" legacyBehavior>
             <a>
@@ -65,7 +65,7 @@ const Header: React.FC<HeaderProps> = ({ menuItems }) => {
             </a>
           </Link>
           {!isMobile && (
-            <nav className="ml-10 flex space-x-4">
+            <nav className="ml-10 flex pace-y-1">
               {menuItems && menuItems.map((item) => (
                 <div className="relative group" key={item.name}>
                   <Link href={item.link} legacyBehavior>
@@ -89,7 +89,7 @@ const Header: React.FC<HeaderProps> = ({ menuItems }) => {
             </nav>
           )}          
         </div>
-        {/*<AudioButton />  */}      
+        <AudioButton />      
         <div className="flex items-center">
           {isMobile && (
             <button onClick={() => setIsOpen(true)} className="text-gray-600 text-3xl">

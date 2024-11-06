@@ -16,7 +16,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "emitDeclarationOnly": false, // Assegura que a compilação não emite apenas declarações
+    "emitDeclarationOnly": false,
     "outDir": "dist",
     "plugins": [
       {

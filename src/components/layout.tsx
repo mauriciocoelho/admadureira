@@ -22,14 +22,15 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       name: 'Departamentos',
       link: '',
       subcategories: [
+        { name: 'ADM Kids', link: '/departamento/admkids' },
         { name: 'CIBE', link: '/departamento/cibe' },
         { name: 'Deafa', link: '/departamento/deafa' },
-        { name: 'EDB', link: '/departamento/ebd' },
-        { name: 'ADM Kids', link: '/departamento/admkids' },
+        { name: 'EDB', link: '/departamento/ebd' },        
         //{ name: 'Mídia', link: '#mocidade' },
         { name: 'Mocidade', link: '/departamento/mocidade' }
       ]
     },
+    { name: 'ADM News', link: '/admnews' },
     { name: 'Dizimos e Ofertas', link: '/dizimos-ofertas' }
     //{ name: 'Serviços', link: '/servicos' }
   ]; 
