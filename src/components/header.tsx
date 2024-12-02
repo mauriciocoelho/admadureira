@@ -90,6 +90,18 @@ const Header: React.FC<HeaderProps> = ({ menuItems }) => {
           )}          
         </div>
         <AudioButton />      
+        {/*<div className="flex items-center space-x-2">
+          <a
+            href="http://app.admadureiraportonacional.com.br/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center sm:space-x-2 text-gray-800 px-4 py-2 rounded-lg focus:outline-none transform transition-transform duration-200 hover:scale-110"
+          >
+            Login
+          </a>
+
+        </div> */}
+
         <div className="flex items-center">
           {isMobile && (
             <button onClick={() => setIsOpen(true)} className="text-gray-600 text-3xl">

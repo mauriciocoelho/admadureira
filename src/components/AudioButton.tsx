@@ -30,6 +30,7 @@ const AudioButton = () => {
                 Seu navegador não suporta o elemento de áudio.
             </audio>
             <a href="https://radiopazpalmas.com.br/" target="_blank" rel="noopener noreferrer" className="hidden sm:inline">
+                {/*
                 <Image 
                     src="/img/LOGO-RADIO-PAZ-FM-2024.png"
                     alt="PazFM Logo"
@@ -37,7 +38,9 @@ const AudioButton = () => {
                     height={60}
                     quality={100}
                 />
+                */}
             </a>
+
         </div>
     );
 };

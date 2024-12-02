@@ -6,6 +6,7 @@ import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import LoadSpinner from "@/components/LoadSpinner";
 import TypingEffect from "@/components/TypingEffect";
+import { getVersiculos } from "@/services/versiculos";
 import Link from "next/link";
 
 interface IFeedItem {
@@ -75,8 +76,8 @@ export default function Home() {
     useEffect(() => {
         const fetchVersiculos = async () => {
             try {
-                const response = await axios.get('/api/versiculos');
-                setVersiculos(response.data);
+                const response = await getVersiculos();
+                setVersiculos(response.data); 
             } catch (error) {
                 console.error('Error fetching versiculos:', error);
             }
@@ -102,7 +103,7 @@ export default function Home() {
                             interval={6000}
                             className="carousel"
                         >
-                            <div className="relative carousel-slide h-[80vh]"> 
+                           {/* <div className="relative carousel-slide h-[80vh]"> 
                                 <Image
                                     src="/img/banner_deafa.png"
                                     alt="Conferência da Família"
@@ -110,22 +111,23 @@ export default function Home() {
                                     objectFit="cover"
                                     quality={100}
                                     className="object-cover"
-                                    style={{ objectPosition: 'top' }} // Mantém o foco na parte superior da imagem
+                                    style={{ objectPosition: 'top' }} 
                                 />
-                                <div className="absolute inset-0 flex flex-col justify-end items-start bg-gradient-to-b from-transparent to-black p-8 text-container">
-                                    <h1 className="text-4xl font-bold text-white mb-4 animate-slide-up">Conferência da Família</h1>
-                                    <p className="text-white text-lg mb-4 animate-slide-up text-justify">
-                                        Participe da nossa Conferência da Família, nos dias <strong>23 e 24 de Novembro</strong>, às <strong>19h</strong> no Templo Matriz. <br />
-                                        Tema: "Perdidos dentro de casa? Deus pode transformar famílias disfuncionais." <br />
-                                        Venha e traga sua família para momentos de renovação e esperança.
-                                    </p>
-                                    <a href="/admnews/conferencia-familia" className="px-6 py-3 bg-green-600 text-white font-semibold rounded-md hover:bg-green-700 transition duration-300 animate-slide-up">
-                                        Saiba Mais →
-                                    </a>
+                                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black">
+                                    <div className="absolute inset-0 flex flex-col justify-end items-start p-8 pb-20 text-container">
+                                        <h1 className="text-4xl font-bold text-white mb-4 animate-slide-up">Conferência da Família</h1>
+                                        <p className="text-white text-lg mb-4 animate-slide-up text-justify">
+                                            Participe da nossa Conferência da Família, nos dias <strong>23 e 24 de Novembro</strong>, às <strong>19h</strong> no Templo Matriz. <br />
+                                            Tema: "Perdidos dentro de casa? Deus pode transformar famílias disfuncionais." <br />
+                                            Venha e traga sua família para momentos de renovação e esperança.
+                                        </p>
+                                        <a href="/admnews/conferencia-familia" className="px-6 py-3 bg-green-600 text-white font-semibold rounded-md hover:bg-green-700 transition duration-300 animate-slide-up">
+                                            Saiba Mais →
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-
-
+                            </div> */}
+                            
                             <div className="relative carousel-slide">
                                 <Image
                                     src="/img/pr_pra.png"
@@ -324,15 +326,6 @@ export default function Home() {
                                     <p className="text-sm text-orange-500">{versiculo.reference}</p>
                                 </div>
                             ))}
-                            {/* Botão Devocional Diário */}
-                            {/*<div className="mt-8 flex">
-                                <a
-                                    href="/devocional-diario"
-                                    className="px-6 py-3 bg-[#FF6F31] text-white rounded-lg shadow hover:bg-orange-600 transition duration-300"
-                                >
-                                    Devocional Diário
-                                </a>
-                            </div>*/}
                         </div>
                     </section>
 
@@ -374,7 +367,7 @@ export default function Home() {
                     </section> */}
 
                     {/* AD NEWS */}
-                    {/* <section
+                    <section
                         className="relative bg-cover bg-center py-20 text-white text-center"
                         id="youtube"
                         style={{ backgroundImage: "url('/img/banner_youtube.png')" }}
@@ -387,38 +380,56 @@ export default function Home() {
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             
                             
-                            <Link href="/admnews/conferencia-familia" className="block bg-white text-black rounded-lg overflow-hidden shadow-md">
+                            <Link href="/admnews/conferencia-da-familia" className="block bg-white text-black rounded-lg overflow-hidden shadow-md">
                                 <Image
-                                    src="/img/banner_deafa.png"
-                                    alt="Conferência da Família"
+                                    src="/midia/admnews/468143562_1243384086874264_3644392121757687463_n_1080.jpg"
+                                    alt=""
                                     width={400}
                                     height={250}
                                     className="w-full h-48 object-cover"
                                 />
                                 <div className="p-4">
-                                    <h3 className="text-lg font-bold">Conferência da Família - Tema e Propósito</h3>
-                                    <p className="text-sm text-gray-500">📅 5 de novembro de 2024</p>
+                                    <h3 className="text-lg font-bold">Conferência da Família</h3>
+                                    <p className="text-sm text-gray-500">📅 24 de novembro de 2024</p>
                                     <p className="text-gray-700 mt-2">
-                                        A Conferência da Família será uma oportunidade única de crescimento e renovação espiritual. Com o tema "Perdidos dentro de casa?", o evento busca fortalecer os laços familiares e proporcionar momentos de edificação e comunhão. Venha e traga sua família!
+                                        Neste final de semana, nos dias 24 e 25 de novembro, tivemos a alegria de realizar a nossa grande Conferência da Família. O evento contou com a presença do Pr. Elidiano Ribeiro, que trouxe uma poderosa ministração da Palavra de Deus, abençoando e edificando vidas e lares.
                                     </p>
                                     <p className="text-blue-600 mt-2 font-semibold">SAIBA MAIS »</p>
                                 </div>
                             </Link>
 
-                            
                             <Link href="/admnews/congresso-jovens" className="block bg-white text-black rounded-lg overflow-hidden shadow-md">
                                 <Image
-                                    src="/img/banner_deafa.png"
-                                    alt="Congresso de Jovens"
+                                    src="/midia/admnews/467649457_18055073281917705_8731660460177381492_n_1080.jpg"
+                                    alt=""
                                     width={400}
                                     height={250}
                                     className="w-full h-48 object-cover"
                                 />
                                 <div className="p-4">
                                     <h3 className="text-lg font-bold">Congresso Jovens</h3>
+                                    <p className="text-sm text-gray-500">📅 20 de novembro de 2024</p>
+                                    <p className="text-gray-700 mt-2">
+                                    O que vivemos ontem no domingo de manhã foi simplesmente sobrenatural! Fomos desafiados e impulsionados a buscar o PROXIMO NÍVEL de Deus todos os dias de nossas vidas, com a certeza de que Ele sempre tem o melhor para nós!
+                                    </p>
+                                    <p className="text-blue-600 mt-2 font-semibold">SAIBA MAIS »</p>
+                                </div>
+                            </Link>
+
+                            
+                            <Link href="/admnews/conferencia-familia" className="block bg-white text-black rounded-lg overflow-hidden shadow-md">
+                                <Image
+                                    src="/midia/admnews/banner_deafa.jpeg"
+                                    alt=""
+                                    width={400}
+                                    height={250}
+                                    className="w-full h-48 object-cover"
+                                />
+                                <div className="p-4">
+                                    <h3 className="text-lg font-bold">Conferência da Família</h3>
                                     <p className="text-sm text-gray-500">📅 5 de novembro de 2024</p>
                                     <p className="text-gray-700 mt-2">
-                                        O Congresso Jovens é um evento que proporciona momentos de reflexão, crescimento espiritual e comunhão entre jovens de várias localidades. Participe e seja renovado em espírito!
+                                        A Conferência da Família será uma oportunidade de crescimento e renovação espiritual. Com o tema "Perdidos dentro de casa? Deus pode transformar famílias disfuncionais. LC 15:11-32", o evento busca fortalecer os laços familiares e proporcionar momentos de edificação e comunhão. Venha e traga sua família!
                                     </p>
                                     <p className="text-blue-600 mt-2 font-semibold">SAIBA MAIS »</p>
                                 </div>
@@ -427,16 +438,18 @@ export default function Home() {
                             </div>
 
 
-                            <div className="mt-10">
-                                <button className="px-6 py-3 bg-white text-black font-semibold rounded-md hover:bg-gray-200">
-                                    Ver mais notícias →
-                                </button>
-                            </div>
+                            <Link href="/admnews">
+                                <div className="mt-10">
+                                    <button className="px-6 py-3 bg-white text-black font-semibold rounded-md hover:bg-gray-200">
+                                        Ver mais notícias →
+                                    </button>
+                                </div>
+                            </Link>
                         </div>
-                    </section> */}
+                    </section>
                     
                     {/* YouTube */}
-                    <section className="relative bg-gradient-to-r from-orange-950 to-orange-800 py-20 text-white text-center" id="youtube">
+                    <section className="bg-slate-50 py-20" id="youtube">
                         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
                             <div className="mb-6">
                                 <p className="text-sm uppercase">Acesse o canal da AD Madureira no Youtube</p>
@@ -446,7 +459,7 @@ export default function Home() {
                                 <div className="mb-8 md:mb-0 md:mr-8">
                                     <iframe
                                         className="responsiveIframe"
-                                        src="https://www.youtube.com/embed/83YoBLn7Nss"
+                                        src="https://www.youtube.com/embed/6IFzyS1bt8Y"
                                         title="YouTube video player"
                                         frameBorder="0"
                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -456,7 +469,7 @@ export default function Home() {
                             <div>
                                 <iframe
                                     className="responsiveIframe"
-                                    src="https://www.youtube.com/embed/uc7yymDFIcI"
+                                    src="https://www.youtube.com/embed/83YoBLn7Nss"
                                     title="YouTube video player"
                                     frameBorder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -499,14 +512,14 @@ export default function Home() {
                     </section>
 
                     {/* Cultos */}
-                    <section className="bg-slate-50 py-20" id="cultos">
+                    <section className="relative bg-gradient-to-r from-orange-950 to-orange-800 py-20 text-white" id="cultos">
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                             <h2 className="text-3xl text-black-600 text-center font-poppins font-semibold">Nossos Cultos</h2>
                             <div className="mt-10">
                                 {cultos.map((culto, index) => (
                                     <div key={index} className="border-b border-gray-200 py-4">
                                         <button
-                                            className="flex justify-between items-center w-full text-left text-gray-700 focus:outline-none"
+                                            className="flex justify-between items-center w-full text-left text-white-700 focus:outline-none"
                                             onClick={() => togglecultos(index)}
                                         >
                                             <span className="text-lg font-medium"><b>{culto.diaSemana}</b></span>
@@ -515,7 +528,7 @@ export default function Home() {
                                             </span>
                                         </button>
                                         {openIndex === index && (
-                                            <p className="mt-2 text-gray-600" dangerouslySetInnerHTML={{ __html: culto.descricaoCulto }}></p>
+                                            <p className="mt-2 text-white-600" dangerouslySetInnerHTML={{ __html: culto.descricaoCulto }}></p>
                                         )}
                                     </div>
                                 ))}

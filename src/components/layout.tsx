@@ -1,9 +1,11 @@
-import React, { ReactNode } from 'react';
+"use client";
+import React, { ReactNode, useEffect } from 'react';
 import Header from './header';
 import Footer from './footer';
 import Chat from './Chat';
 import PoliticaPrivacidade from './PoliticaPrivacidade';
 import ScrollButton from './ScrollButton';
+import googleAnalytics from '../mixins/googleAnalytics';
 
 interface LayoutProps {
   children: ReactNode;
@@ -31,9 +33,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       ]
     },
     { name: 'ADM News', link: '/admnews' },
-    { name: 'Dizimos e Ofertas', link: '/dizimos-ofertas' }
+    { name: 'Dizimos e Ofertas', link: '/dizimos-ofertas' },
     //{ name: 'Serviços', link: '/servicos' }
   ]; 
+
+  useEffect(() => {
+    const googleAnalyticsId = 'G-RRCVLDT76T';
+    googleAnalytics.initialize(googleAnalyticsId);
+  }, []);
 
   return (
     <div className="flex flex-col min-h-screen">

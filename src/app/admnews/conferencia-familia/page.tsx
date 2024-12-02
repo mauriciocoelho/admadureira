@@ -1,18 +1,32 @@
-import React from 'react';
+"use client";
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
 const ConferenciaFamilia = () => {
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 640);
+        };
+
+        handleResize();
+        window.addEventListener('resize', handleResize);
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     return (
         <main className="relative">
             {/* Banner com Imagem */}
-            <section className="relative w-full h-[60vh] overflow-hidden">
+            <section className="relative w-full h-[60vh] overflow-hidden bg-emerald-950"> 
                 <Link href="/" className="block">
                     <Image
-                        src="/img/banner_deafa.png"
+                        src={isMobile ? "/midia/admnews/banner_deafa.jpeg" : "/midia/admnews/banner_deafa.jpeg"}
                         alt="Conferência da Família"
                         layout="fill"
-                        objectFit="contain" // Ajusta a imagem para caber no contêiner sem cortar
+                        objectFit={isMobile ? 'cover' : 'contain'}
                         quality={100}
                         className="object-center"
                     />
@@ -40,7 +54,7 @@ const ConferenciaFamilia = () => {
                             <strong>Data:</strong> 23 e 24 de Novembro <br />
                             <strong>Local:</strong> Templo Matriz<br />
                             <strong>Horário:</strong> 19h<br />
-                            <strong>Ministração:</strong> PR. Francisco Miranda | Palmas-TO<br />
+                            <strong>Ministração:</strong> Pr. Elidiano Ribeiro | Palmas-TO<br />
                         </p>
                         <p className="text-lg text-gray-800 max-w-7xl">
                             Pedimos a todos que adquiriram a camiseta da conferência que venham vestindo-a para celebrarmos juntos este momento especial de fé e comunhão!
