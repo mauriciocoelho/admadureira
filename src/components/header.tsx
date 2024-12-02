@@ -48,7 +48,7 @@ const Header: React.FC<HeaderProps> = ({ menuItems }) => {
   };
 
   return (
-    <header className="relative bg-gradient-to-r from-white to-white py-4">
+    <header className="relative bg-gradient-to-r from-white to-white py-4 shadow-lg">
       <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 flex justify-center items-center">
         <div className="flex items-center">
           <Link href="/" legacyBehavior>

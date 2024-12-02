@@ -8,6 +8,7 @@ import LoadSpinner from "@/components/LoadSpinner";
 import TypingEffect from "@/components/TypingEffect";
 import { getVersiculos } from "@/services/versiculos";
 import Link from "next/link";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 interface IFeedItem {
     media_type: string;
@@ -21,11 +22,66 @@ interface Versiculo {
     reference: string;
 }
 
+const noticias = [
+    {
+        href: '/admnews/40-semestral-obreiros',
+        img: '/midia/admnews/40_semestral.jpeg',
+        title: '40° Semestral de Obreiros',
+        date: '📅 1 de dezembro de 2024',
+        description: 'Nos dias 1 e 2 de dezembro, a Matriz foi palco de um evento inesquecível: a 40ª Semestral de Obreiros. Foram dois dias de comunhão, celebração e renovação espiritual, marcados pela presença poderosa de Deus.',
+    },
+    {
+        href: '/admnews/conferencia-da-familia',
+        img: '/midia/admnews/468143562_1243384086874264_3644392121757687463_n_1080.jpg',
+        title: 'Conferência da Família',
+        date: '📅 24 de novembro de 2024',
+        description: 'Neste final de semana, nos dias 24 e 25 de novembro, tivemos a alegria de realizar a nossa grande Conferência da Família. O evento contou com a presença do Pr. Elidiano Ribeiro, que trouxe uma poderosa ministração da Palavra de Deus, abençoando e edificando vidas e lares.',
+    },
+    {
+        href: '/admnews/congresso-jovens',
+        img: '/midia/admnews/467649457_18055073281917705_8731660460177381492_n_1080.jpg',
+        title: 'Congresso Jovens',
+        date: '📅 20 de novembro de 2024',
+        description: 'O que vivemos ontem no domingo de manhã foi simplesmente sobrenatural! Fomos desafiados e impulsionados a buscar o PROXIMO NÍVEL de Deus todos os dias de nossas vidas, com a certeza de que Ele sempre tem o melhor para nós!',
+    },    
+    {
+        href: '/admnews/conferencia-familia',
+        img: '/midia/admnews/banner_deafa.jpeg',
+        title: 'Conferência da Família',
+        date: '📅 5 de novembro de 2024',
+        description: 'A Conferência da Família será uma oportunidade de crescimento e renovação espiritual. Com o tema "Perdidos dentro de casa? Deus pode transformar famílias disfuncionais. LC 15:11-32", o evento busca fortalecer os laços familiares e proporcionar momentos de edificação e comunhão. Venha e traga sua família!',
+    },
+];
+
 export default function Home() {
     const [feedList, setFeedList] = useState<IFeedItem[]>([]);
     const [loading, setLoading] = useState(true);
     const [versiculos, setVersiculos] = useState<Versiculo[]>([]);
     const [openIndex, setOpenIndex] = useState<number | null>(3);
+
+    // Estado para controlar o índice inicial
+    const [startIndex, setStartIndex] = useState(0);
+    const itemsPerPage = 3; // Número de notícias por exibição
+
+    // Calcular o índice final
+    const endIndex = startIndex + itemsPerPage;
+
+    // Notícias visíveis atualmente
+    const currentNoticias = noticias.slice(startIndex, endIndex);
+
+    // Funções para navegação
+    const handleNext = () => {
+        if (endIndex < noticias.length) {
+            setStartIndex(startIndex + 1); // Avança uma posição
+        }
+    };
+
+    const handlePrev = () => {
+        if (startIndex > 0) {
+            setStartIndex(startIndex - 1); // Retrocede uma posição
+        }
+    };
+
 
     async function getInstaFeed() {
         try {
@@ -85,6 +141,8 @@ export default function Home() {
     
         fetchVersiculos();
     }, []);
+
+    
 
     return (
         <>  
@@ -367,89 +425,65 @@ export default function Home() {
                     </section> */}
 
                     {/* AD NEWS */}
-                    <section
-                        className="relative bg-cover bg-center py-20 text-white text-center"
-                        id="youtube"
-                        style={{ backgroundImage: "url('/img/banner_youtube.png')" }}
-                    >
-                        <div className="absolute inset-0 bg-black opacity-70"></div>
-                        
+                    <section className="bg-white py-20" id="adnews">
+                        {/* Conteúdo */}
                         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
-                            <h2 className="text-3xl text-white text-center font-poppins font-semibold mb-10">AD News</h2>
-    
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            
-                            
-                            <Link href="/admnews/conferencia-da-familia" className="block bg-white text-black rounded-lg overflow-hidden shadow-md">
-                                <Image
-                                    src="/midia/admnews/468143562_1243384086874264_3644392121757687463_n_1080.jpg"
-                                    alt=""
-                                    width={400}
-                                    height={250}
-                                    className="w-full h-48 object-cover"
-                                />
-                                <div className="p-4">
-                                    <h3 className="text-lg font-bold">Conferência da Família</h3>
-                                    <p className="text-sm text-gray-500">📅 24 de novembro de 2024</p>
-                                    <p className="text-gray-700 mt-2">
-                                        Neste final de semana, nos dias 24 e 25 de novembro, tivemos a alegria de realizar a nossa grande Conferência da Família. O evento contou com a presença do Pr. Elidiano Ribeiro, que trouxe uma poderosa ministração da Palavra de Deus, abençoando e edificando vidas e lares.
-                                    </p>
-                                    <p className="text-blue-600 mt-2 font-semibold">SAIBA MAIS »</p>
-                                </div>
-                            </Link>
+                            <h2 className="text-3xl text-center font-poppins font-semibold mb-10">
+                                AD News
+                            </h2>
 
-                            <Link href="/admnews/congresso-jovens" className="block bg-white text-black rounded-lg overflow-hidden shadow-md">
-                                <Image
-                                    src="/midia/admnews/467649457_18055073281917705_8731660460177381492_n_1080.jpg"
-                                    alt=""
-                                    width={400}
-                                    height={250}
-                                    className="w-full h-48 object-cover"
-                                />
-                                <div className="p-4">
-                                    <h3 className="text-lg font-bold">Congresso Jovens</h3>
-                                    <p className="text-sm text-gray-500">📅 20 de novembro de 2024</p>
-                                    <p className="text-gray-700 mt-2">
-                                    O que vivemos ontem no domingo de manhã foi simplesmente sobrenatural! Fomos desafiados e impulsionados a buscar o PROXIMO NÍVEL de Deus todos os dias de nossas vidas, com a certeza de que Ele sempre tem o melhor para nós!
-                                    </p>
-                                    <p className="text-blue-600 mt-2 font-semibold">SAIBA MAIS »</p>
-                                </div>
-                            </Link>
-
-                            
-                            <Link href="/admnews/conferencia-familia" className="block bg-white text-black rounded-lg overflow-hidden shadow-md">
-                                <Image
-                                    src="/midia/admnews/banner_deafa.jpeg"
-                                    alt=""
-                                    width={400}
-                                    height={250}
-                                    className="w-full h-48 object-cover"
-                                />
-                                <div className="p-4">
-                                    <h3 className="text-lg font-bold">Conferência da Família</h3>
-                                    <p className="text-sm text-gray-500">📅 5 de novembro de 2024</p>
-                                    <p className="text-gray-700 mt-2">
-                                        A Conferência da Família será uma oportunidade de crescimento e renovação espiritual. Com o tema "Perdidos dentro de casa? Deus pode transformar famílias disfuncionais. LC 15:11-32", o evento busca fortalecer os laços familiares e proporcionar momentos de edificação e comunhão. Venha e traga sua família!
-                                    </p>
-                                    <p className="text-blue-600 mt-2 font-semibold">SAIBA MAIS »</p>
-                                </div>
-                            </Link>
-
-                            </div>
-
-
-                            <Link href="/admnews">
-                                <div className="mt-10">
-                                    <button className="px-6 py-3 bg-white text-black font-semibold rounded-md hover:bg-gray-200">
-                                        Ver mais notícias →
+                            {/* Grid de Notícias com botões de navegação */}
+                            <div className="relative w-full">
+                                {/* Botão "Anterior" */}
+                                {startIndex > 0 && (
+                                    <button
+                                        onClick={handlePrev}
+                                        className="absolute -left-8 top-1/2 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 text-black rounded-full w-12 h-12 flex items-center justify-center shadow-lg z-10"
+                                    >
+                                        <FaArrowLeft size={20} />
                                     </button>
+                                )}
+
+                                {/* Grid de Notícias */}
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    {currentNoticias.map((noticia, index) => (
+                                        <Link
+                                            key={index}
+                                            href={noticia.href}
+                                            className="block bg-white text-black rounded-lg overflow-hidden shadow-md transform transition-transform duration-300 hover:-translate-y-2"
+                                        >
+                                            <Image
+                                                src={noticia.img}
+                                                alt={noticia.title}
+                                                width={400}
+                                                height={250}
+                                                className="w-full h-48 object-cover"
+                                            />
+                                            <div className="p-4">
+                                                <h3 className="text-lg font-bold">{noticia.title}</h3>
+                                                <p className="text-sm text-gray-500">{noticia.date}</p>
+                                                <p className="text-gray-700 mt-2">{noticia.description}</p>
+                                                <p className="text-blue-600 mt-2 font-semibold">SAIBA MAIS »</p>
+                                            </div>
+                                        </Link>
+                                    ))}
                                 </div>
-                            </Link>
+
+                                {/* Botão "Próximo" */}
+                                {endIndex < noticias.length && (
+                                    <button
+                                        onClick={handleNext}
+                                        className="absolute -right-8 top-1/2 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 text-black rounded-full w-12 h-12 flex items-center justify-center shadow-lg"
+                                    >
+                                        <FaArrowRight size={20} />
+                                    </button>
+                                )}
+                            </div>
                         </div>
                     </section>
                     
                     {/* YouTube */}
-                    <section className="bg-slate-50 py-20" id="youtube">
+                    <section className="relative bg-gradient-to-r from-orange-950 to-orange-800 py-20 text-white text-center" id="youtube">
                         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
                             <div className="mb-6">
                                 <p className="text-sm uppercase">Acesse o canal da AD Madureira no Youtube</p>
@@ -512,14 +546,14 @@ export default function Home() {
                     </section>
 
                     {/* Cultos */}
-                    <section className="relative bg-gradient-to-r from-orange-950 to-orange-800 py-20 text-white" id="cultos">
+                    <section className="bg-slate-50 py-20" id="cultos">
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                             <h2 className="text-3xl text-black-600 text-center font-poppins font-semibold">Nossos Cultos</h2>
                             <div className="mt-10">
                                 {cultos.map((culto, index) => (
                                     <div key={index} className="border-b border-gray-200 py-4">
                                         <button
-                                            className="flex justify-between items-center w-full text-left text-white-700 focus:outline-none"
+                                            className="flex justify-between items-center w-full text-left text-gray-700 focus:outline-none"
                                             onClick={() => togglecultos(index)}
                                         >
                                             <span className="text-lg font-medium"><b>{culto.diaSemana}</b></span>
@@ -528,7 +562,7 @@ export default function Home() {
                                             </span>
                                         </button>
                                         {openIndex === index && (
-                                            <p className="mt-2 text-white-600" dangerouslySetInnerHTML={{ __html: culto.descricaoCulto }}></p>
+                                            <p className="mt-2 text-gray-600" dangerouslySetInnerHTML={{ __html: culto.descricaoCulto }}></p>
                                         )}
                                     </div>
                                 ))}

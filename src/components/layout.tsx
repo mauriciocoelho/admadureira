@@ -27,14 +27,19 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         { name: 'ADM Kids', link: '/departamento/admkids' },
         { name: 'CIBE', link: '/departamento/cibe' },
         { name: 'Deafa', link: '/departamento/deafa' },
-        { name: 'EDB', link: '/departamento/ebd' },        
-        //{ name: 'Mídia', link: '#mocidade' },
+        { name: 'EDB', link: '/departamento/ebd' }, 
         { name: 'Mocidade', link: '/departamento/mocidade' }
       ]
     },
     { name: 'ADM News', link: '/admnews' },
     { name: 'Dizimos e Ofertas', link: '/dizimos-ofertas' },
-    //{ name: 'Serviços', link: '/servicos' }
+    {
+      name: 'Batismo',
+      link: '',
+      subcategories: [
+        { name: '01/12/2024', link: 'https://drive.google.com/drive/folders/1-NCRWhM-Ih93JWR_AE46ZJC2hClj5Vpb' }
+      ]
+    }
   ]; 
 
   useEffect(() => {
